@@ -1,31 +1,32 @@
-var seaImage, ship1, ship;
+var pathimg,path, boy,boy2,invisibleB1,invisibleB2;
 function preload(){
-//loading animation and image
-ship1 = loadAnimation("ship-1.png","ship-2.png","ship-3.png","ship-4.png");
-seaImage = loadImage("sea.png");
+  //pre-load images
+  pathimg = loadImage("path.png");
+  boy2 = loadAnimation("Runner-1.png","Runner-2.png"); 
 }
 
 function setup(){
-  createCanvas(700,600);
-  //creating sea and the ship
-  sea = createSprite(700,300)
-  sea.addImage("Sea",seaImage);
-  //giving velocity to the sea
-  sea.velocityX = -2
-  sea.x = sea.width/2
-  ship = createSprite(200,400,30,30)
-  ship.addAnimation("Ship",ship1);
-  ship.scale = 0.5 
+  createCanvas(360,400);
+  //create sprites here
+  path = createSprite(200,200)
+  path.addImage("path",pathimg);
+  path.velocityY = 4;
+  path.scale = 1.2;
+  boy = createSprite(140,200);
+  boy.addAnimation("boy",boy2);
+  boy.scale = 0.1;
+  invisibleB1 = createSprite(20,200,20,200);
+  invisibleB1.visible = false;
+  invisibleB1 = createSprite(380,200,20,200);
+  invisibleB1.visible = false;
 }
 
 function draw() {
   background("white");
-  //giving velocity to the ship
-  sea.velocityX = -2
-  //condition for infinite sea
-  if (sea.x < 0) {
-    sea.x = sea.width/2
+  if (path.y > 400) {
+    path.y = height/2;
   }
-  ship.velocityX = 2
+  boy.x = World.mouseX;
+  
   drawSprites()
 }
